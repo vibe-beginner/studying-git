@@ -1,6 +1,19 @@
+import astroConfig from '/astro.config';
 import fs from 'fs';
 
 const Util = {
+  astro: {
+    get(key) {
+      const value = astroConfig[key];
+      if (key === 'base') return '/' + Util.trim(value ?? '');
+      return value;
+    },
+    removeBase(path) {
+      const base = Util.astro.get('base');
+      if (base === '/') return path;
+      return path.startsWith(base) ? path.slice(base.length) || '/' : path;
+    },
+  },
   fs: {
     basePath(path) {
       return process.cwd() + '/' + Util.ltrim(path);
@@ -63,6 +76,9 @@ const Util = {
   },
   rtrim(str, char = '/') {
     return str.replaceAll(new RegExp(Util.sprintf('[%s]+$', Util.RegExp.escape(char)), 'g'), '');
+  },
+  trim(str, char = '/') {
+    return Util.rtrim(Util.ltrim(str, char), char);
   },
   Array(length) {
     const array = [];

@@ -1,4 +1,3 @@
-import astroConfig from '/astro.config';
 import Util from '/src/config/Util';
 
 export const args = {};
@@ -43,8 +42,7 @@ export const app = {
     args.siteRootUrlWithoutProtocol = app.url.host;
     args.urlWithoutProtocol = app.url.host + args.path;
 
-    const selfRoute = route(args.path);
-    args.page = Object.values(pages).find((page) => page.route === selfRoute) ?? {};
+    args.page = Object.values(pages).find((page) => page.route === args.path) ?? {};
     args.page.useComponents = Util.fs.getComponents(app.Astro.self.moduleId);
 
     args.prevent = {
@@ -66,7 +64,9 @@ export const app = {
     }));
   },
   makePage(key, argRoute, label) {
-    pages[key] = { key, route: route(argRoute), label };
+    const page = { key, route: route(argRoute), label };
+    page.appRoute = Util.astro.removeBase(page.route);
+    pages[key] = page;
   },
   init(Astro) {
     app.setPages();
@@ -79,8 +79,8 @@ export const app = {
 };
 
 export const rootPath = (path) => {
-  const base = Util.rtrim(astroConfig.base ?? '');
-  path = base + '/' + Util.ltrim(path);
+  const base = Util.rtrim(Util.astro.get('base')) + '/';
+  path = base + Util.ltrim(path);
   return path;
 };
 

@@ -12,27 +12,32 @@
     "top": {
       "key": "top",
       "route": "/studying-git/",
-      "label": "Top"
+      "label": "Top",
+      "appRoute": "/"
     },
     "docs/1": {
       "key": "docs/1",
       "route": "/studying-git/docs/1/",
-      "label": "【第1部】Git + VS Code セットアップ"
+      "label": "【第1部】Git + VS Code セットアップ",
+      "appRoute": "/docs/1/"
     },
     "docs/2": {
       "key": "docs/2",
       "route": "/studying-git/docs/2/",
-      "label": "【第2部】Git の基本とバージョン管理のしくみ"
+      "label": "【第2部】Git の基本とバージョン管理のしくみ",
+      "appRoute": "/docs/2/"
     },
     "docs/2/slide": {
       "key": "docs/2/slide",
       "route": "/studying-git/docs/2/slide/",
-      "label": "スライド：【第2部】Git の基本とバージョン管理のしくみ"
+      "label": "スライド：【第2部】Git の基本とバージョン管理のしくみ",
+      "appRoute": "/docs/2/slide/"
     },
     "docs/3": {
       "key": "docs/3",
       "route": "/studying-git/docs/3/",
-      "label": "【第3部】GitHub ハンズオン"
+      "label": "【第3部】GitHub ハンズオン",
+      "appRoute": "/docs/3/"
     }
   }
 }
