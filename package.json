@@ -3,7 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run disableDevToolbar && astro dev",
+    "enableDevToolbar": "astro preferences reset devToolbar",
+    "disableDevToolbar": "astro preferences disable devToolbar",
     "build": "build/pre-build.sh && astro build && build/post-build.sh",
     "watch": "build/watch.sh",
     "stylelint": "build/stylelint.sh",

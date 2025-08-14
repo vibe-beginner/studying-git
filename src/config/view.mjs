@@ -1,3 +1,4 @@
+import astroConfig from '/astro.config';
 import Util from '/src/config/Util';
 
 export const args = {};
@@ -78,7 +79,8 @@ export const app = {
 };
 
 export const rootPath = (path) => {
-  path = '/studying-git/' + Util.ltrim(path);
+  const base = Util.rtrim(astroConfig.base ?? '');
+  path = base + '/' + Util.ltrim(path);
   return path;
 };
 
