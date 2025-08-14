@@ -18,8 +18,7 @@ export const app = {
     args.locale = 'ja_JP';
     args.og_image = 'img/global/og.png';
   },
-  postInit(Astro, pageArgs) {
-    app.Astro = Astro;
+  postInit(pageArgs) {
     app.args = pageArgs ?? {};
 
     // Overwrite args parameters
@@ -31,10 +30,9 @@ export const app = {
 
     args.og_type = args.path === '/' ? 'website' : 'article';
     if (!isAbsUrl(args.og_image)) args.og_image = assetsUrl(args.og_image, true);
-
-    app.autoConfig();
   },
-  autoConfig() {
+  setConfig(Astro) {
+    app.Astro = Astro;
     app.url = app.Astro.url;
     args.domain = app.url.hostname;
     args.path = app.url.pathname.replace(/\.html$/, '');
@@ -47,6 +45,10 @@ export const app = {
     args.page = Object.values(pages).find((page) => page.route === selfRoute) ?? {};
     args.page.useComponents = Util.fs.getComponents(app.Astro.self.moduleId);
 
+    args.prevent = {
+      css: {},
+      js: {},
+    };
     args.assetList = Object.fromEntries(['css', 'js'].map((ext) => {
       const value = [];
       const willAdd = (dir, file) => {
@@ -64,10 +66,13 @@ export const app = {
   makePage(key, argRoute, label) {
     pages[key] = { key, route: route(argRoute), label };
   },
-  init(Astro, pageArgs) {
+  init(Astro) {
     app.setPages();
+    if (Astro) app.setConfig(Astro);
     app.preInit();
-    if (Astro) app.postInit(Astro, pageArgs);
+  },
+  setPageConfig(pageArgs) {
+    app.postInit(pageArgs);
   },
 };
 

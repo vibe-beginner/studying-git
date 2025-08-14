@@ -3,8 +3,9 @@ import { Link } from '/src/components';
 import Layout from '/src/layouts/Layout.astro';
 import Util from '/src/config/Util';
 import { app, args, pages, assets, img } from '/src/config/view';
+app.init(Astro);
 const pageArgs = {};
-app.init(Astro, pageArgs);
+app.setPageConfig(pageArgs);
 ---
 
 <Layout>
