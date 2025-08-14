@@ -1,0 +1,8 @@
+---
+import { isAbsUrl } from '/src/config/view';
+let { url, label } = Astro.props;
+if (label === undefined) label = url;
+const target = isAbsUrl(url) ? '_blank' : undefined;
+---
+
+<a href={url} target={target}>{label}</a>

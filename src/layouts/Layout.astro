@@ -1,0 +1,49 @@
+---
+import Header from '/src/layouts/Header.astro';
+import Footer from '/src/layouts/Footer.astro';
+import Util from '/src/config/Util';
+import { args, assets, img } from '/src/config/view';
+---
+
+<!DOCTYPE html>
+<html lang={ args.lang } data-app-path={ args.path } data-key={ args.page.key } data-route={ args.page.route }>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{ args.title }</title>
+    <meta name="description" content={ args.description } />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <meta name="format-detection" content="telephone=no, email=no, address=no" />
+    <meta name="generator" content={ Astro.generator } />
+
+    <meta property="og:locale" content={ args.locale } />
+    <meta property="og:type" content={ args.og_type } />
+    <meta property="og:site_name" content={ args.siteName } />
+    <meta property="og:title" content={ args.title } />
+    <meta property="og:description" content={ args.description } />
+    <meta property="og:image" content={ args.og_image } />
+    <meta property="og:url" content={ args.url } />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ args.title } />
+    <meta name="twitter:description" content={ args.description } />
+    <meta name="twitter:site" content={ args.twitterIdWithAtMark } />
+
+    <link rel="stylesheet" href={ assets('css/global/reset.css', true) } />
+    <link rel="stylesheet" href={ assets('css/global/style.css', true) } />
+    <script src={ assets('js/global/base.js', true) }></script>{
+      (args.assetList.css.length > 0 || args.assetList.js.length > 0) && '\n'
+    }{
+      args.assetList.css.map((css) => <Fragment set:html={ Util.sprintf('\n<link rel="stylesheet" href="%s">', assets('css/' + Util.ltrim(css), true)) } />)
+    }{
+      args.assetList.js.map((js) => <Fragment set:html={ Util.sprintf('\n<script src="%s"></script>', assets('js/' + Util.ltrim(js), true)) } />)
+    }
+  </head>
+  <body>
+    <div id="page-container">
+      <header id="page-header"><Header /></header>
+      <main id="page-main"><slot /></main>
+      <footer id="page-footer"><Footer /></footer>
+    </div>
+  </body>
+</html>
