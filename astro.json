@@ -1,0 +1,23 @@
+{
+  "args": {
+    "siteName": "__SITE_NAME__",
+    "titleSuffix": "__TITLE_SUFFIX__",
+    "description": "__DESCRIPTION__",
+    "twitterIdWithAtMark": "__@TWITTER_ID__",
+    "lang": "ja",
+    "locale": "ja_JP",
+    "og_image": "img/global/og.png"
+  },
+  "pages": {
+    "top": {
+      "key": "top",
+      "route": "/",
+      "label": "Top"
+    },
+    "subpage": {
+      "key": "subpage",
+      "route": "/subpage/",
+      "label": "Sub page"
+    }
+  }
+}
