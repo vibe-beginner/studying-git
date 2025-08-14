@@ -1,9 +1,9 @@
 {
   "args": {
-    "siteName": "__SITE_NAME__",
-    "titleSuffix": "__TITLE_SUFFIX__",
-    "description": "__DESCRIPTION__",
-    "twitterIdWithAtMark": "__@TWITTER_ID__",
+    "siteName": "vibe-beginner",
+    "titleSuffix": "非エンジニアのためのGit/GitHub勉強会",
+    "description": "2025年8月15日(金)開催のGit/GitHub勉強会です",
+    "twitterIdWithAtMark": "@hayakawagomi",
     "lang": "ja",
     "locale": "ja_JP",
     "og_image": "img/global/og.png"
@@ -11,13 +11,23 @@
   "pages": {
     "top": {
       "key": "top",
-      "route": "/",
+      "route": "/studying-git/",
       "label": "Top"
     },
-    "subpage": {
-      "key": "subpage",
-      "route": "/subpage/",
-      "label": "Sub page"
+    "docs/1": {
+      "key": "docs/1",
+      "route": "/studying-git/docs/1/",
+      "label": "【第1部】Git + VS Code セットアップ"
+    },
+    "docs/2": {
+      "key": "docs/2",
+      "route": "/studying-git/docs/2/",
+      "label": "【第2部】Git の基本とバージョン管理のしくみ"
+    },
+    "docs/3": {
+      "key": "docs/3",
+      "route": "/studying-git/docs/3/",
+      "label": "【第3部】GitHub ハンズオン"
     }
   }
 }

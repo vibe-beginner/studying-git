@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&display=swap');
+
+:root {
+  --font-sans: 'Noto Sans JP', sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
+  --font-mono: Menlo, Monaco, 'Courier New', Consolas, monospace;
+  --font-verdana: Verdana, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
@@ -5,7 +14,19 @@ html {
 
 body {
   -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  font-family: var(--font-sans);
   font-size: 1.6rem;
+  overflow-wrap: anywhere;
+}
+
+table {
+  overflow-wrap: break-word;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
 }
 
 .wbr {
@@ -35,33 +56,9 @@ body {
   }
 }
 
-#page-main {
-  padding-bottom: 50px;
-  text-align: center;
-
-  .content-inner {
-    > * {
-      margin-top: 30px;
-    }
-  }
-
-  h1 {
-    font-family: serif;
-    font-weight: bold;
-    font-size: 3.2rem;
-  }
-  pre {
-    overflow: auto;
-    padding: 8px;
-    border: 1px solid #090;
-    background: #cfc;
-    text-align: left;
-  }
-}
-
 #page-footer {
   border-top: 1px solid #999;
-  background: #f0f0f0;
+  background: #f0fff0;
 
   .footerArea {
     padding: 4px 8px 8px;
@@ -69,7 +66,7 @@ body {
     .copyright {
       padding-top: 4px;
       text-align: center;
-      font-family: Verdana, sans-serif;
+      font-family: var(font-verdana);
       font-size: 1.4rem;
 
       img {
