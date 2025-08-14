@@ -1,0 +1,105 @@
+---
+import { Link, Slide } from '/src/components';
+import Layout from '/src/layouts/Layout.astro';
+import Util from '/src/config/Util';
+import { app, args, pages, assets, img } from '/src/config/view';
+app.init(Astro);
+const pageArgs = {
+  title: args.page.label,
+};
+app.setPageConfig(pageArgs);
+---
+
+<Slide>
+  <section class="slide cover" data-title="Cover">
+    <p class="kicker">__KICKER_TEXT__</p>
+    <h1>__Heading_1__</h1>
+    <h2>__Heading_2__</h2>
+    <p class="lead">__LEAD_TEXT__</p>
+  </section>
+
+  <section class="slide" data-title="Agenda (TOC)">
+    <h1>Agenda</h1>
+    <ol class="toc-list" id="toc"></ol>
+  </section>
+
+  <section class="slide chapter" data-title="1. Overview">
+    <h1>Overview</h1>
+    <p>__TEXT__</p>
+  </section>
+
+  <section class="slide" data-title="1-1. Example">
+    <h2>Example</h2>
+    <p>__TEXT__</p>
+    <ul>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+    </ul>
+  </section>
+
+  <section class="slide" data-title="1-2. Example">
+    <h2>Example</h2>
+    <p>__TEXT__</p>
+    <ul>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+    </ul>
+  </section>
+
+  <section class="slide chapter" data-title="2. Details">
+    <h1>Details</h1>
+    <p>__TEXT__</p>
+  </section>
+
+  <section class="slide" data-title="2-1. Example">
+    <h2>Example</h2>
+    <p>__TEXT__</p>
+    <ul>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+    </ul>
+  </section>
+
+  <section class="slide" data-title="2-2. Example">
+    <h2>Example</h2>
+    <p>__TEXT__</p>
+    <ul>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+    </ul>
+  </section>
+
+  <section class="slide chapter" data-title="3. Conclusion">
+    <h1>Conclusion</h1>
+    <p>__TEXT__</p>
+  </section>
+
+  <section class="slide" data-title="3-1. Example">
+    <h2>Example</h2>
+    <p>__TEXT__</p>
+    <ul>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+    </ul>
+  </section>
+
+  <section class="slide" data-title="3-2. Example">
+    <h2>Example</h2>
+    <p>__TEXT__</p>
+    <ul>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+      <li>__TEXT__</li>
+    </ul>
+  </section>
+
+  <section class="slide" data-title="4. Thank You">
+    <h1>Thank you</h1>
+    <p class="lead">Do you have any questions?</p>
+  </section>
+</Slide>

@@ -26,9 +26,9 @@ app.setPageConfig(pageArgs);
         </div>
         <div class="section-body">
           <div class="nav">
-            <ul>{ Object.values(pages).filter(page => /^docs\//.test(page.key)).map(page => <Fragment>
+            <ul>{ Object.values(pages).filter(page => /^docs\/\d+$/.test(page.key)).map(page => <Fragment>
               <li>
-                <Link url={ page.route } label={ page.label } />
+                <Link page={ page } />
               </li></Fragment>) }
             </ul>
           </div>

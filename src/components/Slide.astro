@@ -1,0 +1,27 @@
+---
+import Layout from '/src/layouts/Layout.astro';
+import Util from '/src/config/Util';
+import { app, args, pages, assets, img } from '/src/config/view';
+args.prevent.css.common = true;
+args.prevent.header = true;
+args.prevent.footer = true;
+---
+
+<Layout>
+  <div class="wrapper" role="application" aria-label="Slide deck">
+    <div class="deck" id="deck" tabindex="0">
+      <div class="misc">
+        <ul class="misc-controls">
+          <li class="pill"><a href="./">Top</a></li>
+          <li class="pill"><button type="button" class="unstyled" data-action="slide-prev">←</button> / <button type="button" class="unstyled" data-action="slide-next">→</button> で移動</li>
+          <li class="pill">数字キーで Chapter ジャンプ</li>
+          <li class="pill"><button type="button" class="unstyled" data-action="change-theme"><kbd>T</kbd> キー</button>でテーマ切り替え</li>
+        </ul>
+        <div class="misc-pagenum"><span class="pagenum-current">1</span> / <span class="pagenum-total">1</span></div>
+        <div class="misc-progress" id="progress"></div>
+      </div>
+
+      <div class="slides"><slot /></div>
+    </div>
+  </div>
+</Layout>

@@ -2,6 +2,9 @@ a {
   color: #06c;
 }
 
+#page-main {
+  padding-bottom: 50px;
+}
 #page-main h1, #page-main h2, #page-main h3, #page-main h4, #page-main h5, #page-main h6 {
   margin-top: 40px;
   font-weight: bold;

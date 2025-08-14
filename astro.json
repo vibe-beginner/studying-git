@@ -24,6 +24,11 @@
       "route": "/studying-git/docs/2/",
       "label": "【第2部】Git の基本とバージョン管理のしくみ"
     },
+    "docs/2/slide": {
+      "key": "docs/2/slide",
+      "route": "/studying-git/docs/2/slide/",
+      "label": "スライド：【第2部】Git の基本とバージョン管理のしくみ"
+    },
     "docs/3": {
       "key": "docs/3",
       "route": "/studying-git/docs/3/",

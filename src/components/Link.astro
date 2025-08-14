@@ -1,6 +1,10 @@
 ---
 import { isAbsUrl } from '/src/config/view';
-let { url, label } = Astro.props;
+let { page, url, label } = Astro.props;
+if (page != null) {
+  url = page.route;
+  label = page.label;
+}
 if (label === undefined) label = url;
 const target = isAbsUrl(url) ? '_blank' : undefined;
 ---

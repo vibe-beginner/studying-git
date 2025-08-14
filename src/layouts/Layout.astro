@@ -43,9 +43,9 @@ import { args, assets, img } from '/src/config/view';
   </head>
   <body>
     <div id="page-container">
-      <header id="page-header"><Header /></header>
+      { !args.prevent.header && <header id="page-header"><Header /></header> }
       <main id="page-main"><slot /></main>
-      <footer id="page-footer"><Footer /></footer>
+      { !args.prevent.footer && <footer id="page-footer"><Footer /></footer> }
     </div>
   </body>
 </html>

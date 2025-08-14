@@ -7,6 +7,7 @@ export const app = {
     app.makePage('top', '/', 'Top');
     app.makePage('docs/1', '/docs/1', '【第1部】Git + VS Code セットアップ');
     app.makePage('docs/2', '/docs/2', '【第2部】Git の基本とバージョン管理のしくみ');
+    app.makePage('docs/2/slide', '/docs/2/slide', 'スライド：【第2部】Git の基本とバージョン管理のしくみ');
     app.makePage('docs/3', '/docs/3', '【第3部】GitHub ハンズオン');
   },
   preInit() {
