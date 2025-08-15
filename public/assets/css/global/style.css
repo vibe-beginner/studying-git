@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&display=swap");
 :root {
+  --color-red: #ff0054;
+  --color-yellow: #f8b409;
+  --color-green: #7bd12d;
+  --color-purple: #781bfc;
   --font-sans: "Noto Sans JP", sans-serif;
   --font-serif: "Noto Serif JP", serif;
   --font-mono: Menlo, Monaco, "Courier New", Consolas, monospace;
@@ -20,12 +24,105 @@ body {
 }
 
 table {
+  box-sizing: border-box;
+  width: fit-content;
+  margin-inline: auto;
+  border-collapse: separate;
+  border-width: 1px 0 0 1px;
+  border-style: solid;
+  border-color: #999;
   overflow-wrap: break-word;
+}
+table.full {
+  width: 100%;
+}
+table[data-center-column=all] td {
+  text-align: center;
+}
+table[data-center-column~="1"] td:nth-child(1) {
+  text-align: center;
+}
+table[data-center-column~="2"] td:nth-child(2) {
+  text-align: center;
+}
+table[data-center-column~="3"] td:nth-child(3) {
+  text-align: center;
+}
+table[data-center-column~="4"] td:nth-child(4) {
+  text-align: center;
+}
+table[data-center-column~="5"] td:nth-child(5) {
+  text-align: center;
+}
+table[data-center-column~="6"] td:nth-child(6) {
+  text-align: center;
+}
+table[data-center-column~="7"] td:nth-child(7) {
+  text-align: center;
+}
+table[data-center-column~="8"] td:nth-child(8) {
+  text-align: center;
+}
+table[data-center-column~="9"] td:nth-child(9) {
+  text-align: center;
+}
+table :is(th, td) {
+  padding: 4px 8px;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  border-color: #999;
+}
+table thead th {
+  background: #ddd;
+}
+table th {
+  text-align: center;
+  font-weight: bold;
 }
 
 img {
   height: auto;
   max-width: 100%;
+}
+
+img.border {
+  outline: 1px solid #ccc;
+}
+
+pre {
+  padding: 4px 8px;
+  border: 1px solid #090;
+  background: #cfc;
+}
+
+code {
+  padding: 2px 4px;
+  border: 1px solid var(--line);
+  background: var(--global-bg);
+  font-family: var(--font-mono);
+}
+
+strong {
+  font-style: normal;
+  font-weight: bold;
+}
+
+em {
+  font-style: normal;
+  font-weight: bold;
+}
+
+small {
+  font-size: 75%;
+}
+
+a {
+  color: #06c;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+a:hover {
+  text-decoration: none;
 }
 
 .wbr {

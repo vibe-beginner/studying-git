@@ -102,7 +102,8 @@
           return;
         }
         if (!isAfterTocSlide) return;
-        const title = s.dataset.title || `Slide ${i + 1}`;
+        const heading = s.querySelector('h1, h2, h3');
+        const title = s.getAttribute('data-title') ?? heading ? heading.textContent : 'Untitled';
         const li = document.createElement('li');
         const a = document.createElement('a');
         const slideNum = i + 1;

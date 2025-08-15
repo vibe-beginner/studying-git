@@ -11,95 +11,352 @@ app.setPageConfig(pageArgs);
 ---
 
 <Slide>
-  <section class="slide cover" data-title="Cover">
-    <p class="kicker">__KICKER_TEXT__</p>
-    <h1>__Heading_1__</h1>
-    <h2>__Heading_2__</h2>
-    <p class="lead">__LEAD_TEXT__</p>
+  <section class="slide cover">
+    <p class="kicker">非エンジニアのためのGit/GitHub勉強会</p>
+    <h1 style="font-size: 28px;">【第2部】Git の基本とバージョン管理のしくみ</h1>
+    <div class="lead">
+      <p>『スマートフォンのない生活に戻れますか？』</p>
+      <p style="padding-left: 4em; font-size: 12px;">――『Git』それはあなたにとってのスマートフォンのようなもの</p>
+    </div>
+    <ul>
+      <li>イベント：<Link url={ pages.top.route } label="非エンジニアのためのGit/GitHub勉強会" /></li>
+      <li>発表者：<Link url="https://x.com/debiru_R" label="@debiru_R" /></li>
+    </ul>
   </section>
 
-  <section class="slide" data-title="Agenda (TOC)">
+  <section class="slide" style="zoom: 0.8;">
     <h1>Agenda</h1>
     <ol class="toc-list" id="toc"></ol>
   </section>
 
-  <section class="slide chapter" data-title="1. Overview">
-    <h1>Overview</h1>
-    <p>__TEXT__</p>
+  <section class="slide chapter">
+    <h1>1. @debiru_R について</h1>
+    <p>発表者のプロフィール</p>
   </section>
 
-  <section class="slide" data-title="1-1. Example">
-    <h2>Example</h2>
-    <p>__TEXT__</p>
+  <section class="slide">
+    <h2>1-1. プロフィール</h2>
+    <div class="mod-block">
+      <div class="block">
+        <table class="full" data-full-column="2">
+          <tbody>
+            <tr>
+              <th>Twitter (X)</th>
+              <td><Link url="https://x.com/debiru_R" label="@debiru_R" /></td>
+            </tr>
+            <tr>
+              <th>氏名</th>
+              <td>高井 実 (Takai Minoru)</td>
+            </tr>
+            <tr>
+              <th>プロフィール</th>
+              <td>HTML をこよなく愛する HTML 専門家。本業は Web サイト/システム開発をするフルスタックエンジニア。Web/DNS の知識を活かして困っている人を助けたりしている。エンジニア歴は2010年から。Git もその頃から使っている。</td>
+            </tr>
+            <tr>
+              <th>きっかけ</th>
+              <td><Link url="https://x.com/hayakawagomi/status/1874397341643632700" label="「ハヤカワ五味 なかま募集2025」" />に応募して、ハヤカワ五味さんとなかまになって今ココ。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block x-fit">
+        <p><img src="https://debiru.net/assets/img/global/takai-minoru-480x640.jpg" alt="高井 実の顔写真。晴れた空の下、黒一色の服装で公園の鉄棒の上に跨って手前側を見ている。" width="180" height="240" /></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide chapter">
+    <h1>2. Git って何？</h1>
+    <p>Git の概要について</p>
+  </section>
+
+  <section class="slide">
+    <h2>2-1. クリエイターとデータの管理</h2>
+    <p>ソフトウェア開発に限らず、原稿や文章などドキュメントを書いたり、デザイナーさんならデザインデータを作成したりすることがあります。</p>
+    <p>共通しているのは、コンピュータ上で<strong>「データを管理する」</strong>ということです。</p>
+    <p>コンピュータを使うクリエイターは、<strong>データの管理</strong>を行う必要があるのです。</p>
+  </section>
+
+  <section class="slide">
+    <h2>2-2. 人々はデータのバージョン管理をしてきた</h2>
+    <p>コンピュータ上ではデータは<strong>「ファイル」</strong>単位で管理されます。</p>
+    <p>ファイルだけでバージョンを管理する方法もあります。</p>
     <ul>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
+      <li><code>原稿_1.docx</code> / <code>原稿_2.docx</code> とか</li>
+      <li><code>原稿_最終版.docx</code> / <code>原稿_最終版_FB対応.docx</code> / <code>原稿_最終版_FIX.docx</code> とか</li>
+      <li><code>原稿_20250120.docx</code> / <code>原稿_20250312.docx</code> / <code>原稿_20250815.docx</code> とか</li>
+    </ul>
+    <p>別にこれでもいいんです。これで困らなければ。</p>
+    <p>複数人のクリエイターと共同作業をし始めると、困りごとが生じてきます。</p>
+  </section>
+
+  <section class="slide" style="zoom: 0.9;">
+    <h2>2-3. 同時に作業したいけれど…</h2>
+    <p>AさんとBさんの2人で、原稿の一緒に書くことを考えます。1章をAさん、2章をBさん、3章をAさんが書きたいとき、どうやってデータを管理すればよいでしょうか。</p>
+    <ul>
+      <li><code>原稿.txt</code> を2人がそれぞれのパソコンで複製してから同時に編集すると、Aさんの方では「1章と3章」が書かれ、Bさんの方では「2章」が書かれます。最後に、Aさんの <code>原稿.txt</code> とBさんの <code>原稿.txt</code> を合体（マージ）する必要があります。</li>
+      <li>もう少し工夫しましょう。<code>原稿_1章.txt</code> と <code>原稿_2章.txt</code> と <code>原稿_3章.txt</code> を作り、それぞれを編集すればより管理しやすくなりそうです。</li>
+      <li>書き終えた後で、全てのファイルを確認し合って、合体した完成版 <code>原稿.txt</code> を作ればよさそうです。</li>
+    </ul>
+    <p>なんとかなりそう…？</p>
+  </section>
+
+  <section class="slide">
+    <h2>2-4. 同じ場所を編集したい！</h2>
+    <p>Aさんが1章を書いているとき、Bさんも1章の一部を書きたくなりました。なんなら、Aさんが書いた内容をBさんが修正したいというケースもあります。</p>
+    <ul>
+      <li><code>原稿_1章.txt</code> を共同編集する…？</li>
+      <li>AさんもBさんも同時に編集したときに、その両方の内容を活かすには…。2-3 で最初に話した <code>原稿.txt</code> と同じ問題が生じてしまいます。</li>
+      <li><strong>バージョン管理システム</strong>で解決しよう！</li>
     </ul>
   </section>
 
-  <section class="slide" data-title="1-2. Example">
-    <h2>Example</h2>
-    <p>__TEXT__</p>
+  <section class="slide">
+    <h2>2-5. バージョン管理システム</h2>
+    <p><strong>「ファイル」</strong>ではなく<strong>「差分（diff）」</strong>に注目してデータを管理します。</p>
     <ul>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
+      <li>ファイルごとに編集内容を保存してデータを管理するのは無理があった</li>
+      <li>どんな編集をしたという「編集内容（差分）」を記録して、合体（マージ）はシステムで行う</li>
+      <li>AさんもBさんも、お互いにどの章でも編集できる</li>
+      <li>Aさんが編集した内容を、Bさんが修正するということもできる</li>
+    </ul>
+    <p>そうして<strong>「バージョン管理システム」</strong>が登場しました。</p>
+  </section>
+
+  <section class="slide">
+    <h2>2-6. バージョン管理システムの歴史</h2>
+    <p>「ファイル管理」の時代から「バージョン管理システム」がいろいろ登場していきます。</p>
+    <table class="full" data-center-column="1 2" data-full-column="3">
+      <thead>
+        <tr>
+          <th>システム名</th>
+          <th>よく使われていた時代</th>
+          <th>特徴</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>RCS</td>
+          <td>1982年〜2000年</td>
+          <td>ローカル型バージョン管理システム（Local VCS）</td>
+        </tr>
+        <tr>
+          <td>Subversion (SVN)</td>
+          <td>2000年〜2010年</td>
+          <td>集中型バージョン管理システム（Centralized VCS）</td>
+        </tr>
+        <tr>
+          <td>Git</td>
+          <td>2008年〜現在</td>
+          <td>分散型バージョン管理システム（Distributed VCS）</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>ここでは時間が足りないので詳しいことは説明できませんが、バージョン管理システムも進化していった結果、使いやすく、データの損失のリスクが低く、バージョン管理システムが置いてあるサーバー（リモートサーバー）と通信ができない状態でもローカルだけで使えるといったメリットを持つ <strong>Git</strong> が登場したのです。</p>
+  </section>
+
+  <section class="slide">
+    <h2>2-7. 2章まとめ「Git って何？」</h2>
+    <ul>
+      <li>ファイルではなく<strong>「差分（diff）」</strong>を管理することでデータを管理するシステムのひとつ</li>
+      <li>2008年に登場した、2025年時点で最も使われているバージョン管理システム</li>
+      <li><strong>差分</strong>というものは Wiki とか Wikipedia の編集履歴からも確認できる（例：<Link url="https://ja.wikipedia.org/w/index.php?title=Git&action=history" label="Git - Wikipedia" />）</li>
     </ul>
   </section>
 
-  <section class="slide chapter" data-title="2. Details">
-    <h1>Details</h1>
-    <p>__TEXT__</p>
+  <section class="slide chapter">
+    <h1>3. Git の基礎知識</h1>
+    <p>Git でバージョン管理をするための基礎知識</p>
   </section>
 
-  <section class="slide" data-title="2-1. Example">
-    <h2>Example</h2>
-    <p>__TEXT__</p>
+  <section class="slide">
+    <h2>3-1. Git でバージョン管理をするには</h2>
+    <p>Git では、あるディレクトリを対象に、その中身を管理します。あるディレクトリを <strong>Git 管理</strong>するには次の2つの方法があります。</p>
     <ul>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
+      <li>(1) 作成済みの Git リポジトリを <code>git clone "ここに clone 用の URL"</code> でダウンロードする</li>
+      <li>(2) ローカルにある管理したいディレクトリの中で <code>git init</code> を実行する</li>
     </ul>
+    <p><strong>Git 管理</strong>されているディレクトリには <code>.git/</code> という隠しディレクトリが存在しています（clone や init を実行した頂点のディレクトリだけに存在します。下層ディレクトリには <code>.git/</code> は存在しません）。</p>
   </section>
 
-  <section class="slide" data-title="2-2. Example">
-    <h2>Example</h2>
-    <p>__TEXT__</p>
-    <ul>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-    </ul>
+  <section class="slide">
+    <h2>3-2. Git を使ってみる</h2>
+    <p>Git でバージョン管理をするには、次のような流れで「差分」を管理します。</p>
+    <ol>
+      <li>自分の世界を作成する（ブランチの作成、または既存ブランチへの移動）</li>
+      <li>ファイルを編集する（何個でも）</li>
+      <li><strong>編集内容（差分）</strong>を記録する（コミット）</li>
+      <li>自分の世界の作業内容をリモートサーバーに送信する（プッシュ）</li>
+    </ol>
+    <p>自分の世界を用意する（ブランチ作成）、編集する（差分を作る）、差分を記録する（コミット）、作業内容をリモートサーバー（GitHub）に送信する。</p>
+    <p>という作業を繰り返すことで、<strong>差分を管理</strong>しつつ、ひとつのプロダクトを複数人で共同編集できるようになります。AさんとBさんがやりたかったことがスムーズに行えるようになります。</p>
   </section>
 
-  <section class="slide chapter" data-title="3. Conclusion">
-    <h1>Conclusion</h1>
-    <p>__TEXT__</p>
+  <section class="slide">
+    <h2>3-3. 自分の世界を作る（作業ブランチ）</h2>
+    <p>バージョン管理システムを使っても、AさんとBさんが同じ世界を同時に編集していたら、お互いの作業内容が衝突してしまいます。</p>
+    <p>これを防ぐために、Git では<strong>「世界（ブランチ）」</strong>を複数作成して、異なる世界の中で自由に編集を行います。<small>なお、「世界」という表現は私の資料だけで登場させた概念なので Web 検索しても情報は出てきません。これについて知りたければ「ブランチとは何か」などと調べてみてください。</small></p>
+    <p>これによって、例えば同じファイル <code>/sample.txt</code> の1行目に、Aさんが「Aです」と書いて記録して、Bさんが「Bです」と書いて記録したそれぞれの差分を用意したとしても、リモートサーバー（GitHub）上ではそれらを同時に記録・管理できるのです（Aさんの世界では「Aさん」、Bさんの世界では「Bさん」と書かれている、という情報が GitHub 上から見られるようになります）。</p>
   </section>
 
-  <section class="slide" data-title="3-1. Example">
-    <h2>Example</h2>
-    <p>__TEXT__</p>
-    <ul>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-    </ul>
+  <section class="slide">
+    <h2>3-4. main ブランチという存在</h2>
+    <p>AさんとBさんの世界がばらばらに存在しているだけでは、続きの作業をしたり、「完成版（途中経過でもいいので合体版）」を確認することができずに困ってしまいます。</p>
+    <p>そこで登場するのが「合体用の世界（ブランチ）」です。好きな名前で「AさんBさん合体世界」といったブランチを作ることもできますが、いわゆる「最終完成版」を表す世界に対応するブランチが <strong>main</strong> ブランチです。昔は <strong>master</strong> ブランチという名前でしたが、ポリティカル・コレクトネスの観点から改名されました。</p>
+    <p><strong>main</strong> ブランチが「最終完成版」を意味する世界なので、ここに合体（マージ）された編集内容でプロダクトがリリースされたり、書籍が出版されるという運用が行われます。それ以外の世界（ブランチ）は「実験場」という感じなので、好き勝手に作成した世界（ブランチ）に変な変更内容が入っていても、特に問題はありません。いろいろ実験（試行錯誤）して差分を記録しておいて、そのうちどの差分を <strong>main</strong> にマージするかを判断する、ということが重要なのです。</p>
   </section>
 
-  <section class="slide" data-title="3-2. Example">
-    <h2>Example</h2>
-    <p>__TEXT__</p>
-    <ul>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-      <li>__TEXT__</li>
-    </ul>
+  <section class="slide">
+    <h2>3-5. ベースとする世界を確認する（<code>git log</code>）</h2>
+    <p><strong>Git 管理</strong>されているディレクトリで、まず <code>git log</code> を実行してみてください。</p>
+    <pre><strong class="x-gold">commit 20d6e85d61b329feca62467c646a5b7a85b802e6</strong> (<strong class="x-cyan">HEAD</strong> -> <strong class="x-green">main</strong>, <strong class="x-red">origin/main</strong>, <strong class="x-red">origin/HEAD</strong>)
+Author: debiru {"<main.coeurl@gmail.com>"}
+Date:   Fri Aug 15 13:13:12 2025 +0900
+
+    add sample pages</pre>
+    <p>これまでのコミットログが確認できます。この続きから編集作業をしたいことを確認できたら、自分の世界（ブランチ）を作成します。</p>
   </section>
 
-  <section class="slide" data-title="4. Thank You">
-    <h1>Thank you</h1>
-    <p class="lead">Do you have any questions?</p>
+  <section class="slide" style="zoom: 0.8;">
+    <h2>3-6. ブランチを作成する（<code>git branch</code>）</h2>
+    <p>次に <code>git branch -a</code> コマンドを実行してみましょう。</p>
+    <pre>* <strong class="x-green">main</strong>
+  <strong class="x-red">remotes/origin/HEAD</strong> -> origin/main
+  <strong class="x-red">remotes/origin/main</strong></pre>
+    <p>いま <strong>*</strong> が付いている <strong>main</strong> ブランチにいることが分かります。</p>
+    <p>作業用の自分の世界を作りたいので、<code>git checkout -b debiru-commit-test</code> のようなコマンドを実行します。もう一度 <code>git branch</code> を実行してみましょう。</p>
+    <pre>* <strong class="x-green">debiru-commit-test</strong>
+  main</pre>
+    <p>自分の世界である <strong>debiru-commit-test</strong> ブランチを作成して、そこに移動することができました。</p>
+  </section>
+
+  <section class="slide" style="zoom: 0.8;">
+    <h2>3-7. ファイルを編集する</h2>
+    <p><strong>Git 管理</strong>されているディレクトリ内で、まず <code>git status</code> を実行してみてください。</p>
+    <pre>On branch debiru-commit-test
+nothing to commit, working tree clean</pre>
+    <p>変更差分が何もないとき、上記のように表示されます。</p>
+    <p>ファイルを編集してから <code>git status</code> を実行すると、以下のようになります。</p>
+    <pre>On branch debiru-commit-test
+Changes not staged for commit:
+  (use "git add {"<file>"}..." to update what will be committed)
+  (use "git restore {"<file>"}..." to discard changes in working directory)
+        <strong class="x-red">modified:   index.html</strong>
+
+no changes added to commit (use "git add" and/or "git commit -a")</pre>
+  </section>
+
+  <section class="slide" style="zoom: 0.9;">
+    <h2>3-8. コミットする（<code>git add</code>）</h2>
+    <p>手元でいろいろなファイルを変更したとして、その全て、あるいは一部を記録する操作が<strong>「コミット」</strong>です。</p>
+    <p>コミットするには、まず、どのファイル（あるいはファイル内の差分）を「自分の世界」に記録するかを選択する必要があります。</p>
+    <p>コミット対象を選択するためのコマンドが <code>git add</code> です。<code>git add index.html</code> とすれば、編集した <code>index.html</code> の差分が<strong>「ステージングエリア」</strong>に追加されます。<code>git status</code> を実行してみましょう。</p>
+    <pre>On branch debiru-commit-test
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        <strong class="x-green">modified:   index.html</strong></pre>
+  </section>
+
+  <section class="slide" style="zoom: 0.7;">
+    <h2>3-9. コミットする（<code>git commit</code>）</h2>
+    <p><code>git status</code> で緑色になっているファイルを「記録」したければ <code>git commit -m "add message into index.html"</code> のようにコマンドを実行します。</p>
+    <p>これは、コミットメッセージ（どんな変更をしたか、を説明する文章）を付けてコミットを実行するコマンドです。<code>git log</code> を実行すると、これまでのコミット履歴を確認できます。</p>
+    <pre><strong class="x-gold">commit 0f2a573827cbf085c63e61e14d1ba8ab889c24a0</strong> (<strong class="x-cyan">HEAD</strong> -> <strong class="x-green">debiru-commit-test</strong>)
+Author: debiru {"<main.coeurl@gmail.com>"}
+Date:   Fri Aug 15 14:16:37 2025 +0900
+
+    add message into index.html
+
+<strong class="x-gold">commit 20d6e85d61b329feca62467c646a5b7a85b802e6</strong> (<strong class="x-red">origin/main</strong>, <strong class="x-red">origin/HEAD</strong>, <strong class="x-green">main</strong>)
+Author: debiru {"<main.coeurl@gmail.com>"}
+Date:   Fri Aug 15 13:13:12 2025 +0900
+
+    add sample pages</pre>
+  </section>
+
+  <section class="slide">
+    <h2>3-10. GitHub に送信する（<code>git push</code>）</h2>
+    <p>ここまでの作業は、<code>git clone</code> 以外はすべてローカルでの作業でした（つまりインターネットが繋がっていなくても作業できるのです！）。</p>
+    <p>しかし、あるタイミングで自分の作業内容を他の人にも共有するために、リモートサーバー（つまり GitHub）に送信する必要があります。</p>
+    <p>なお、これはリモートサーバーに Git リポジトリがあり、そこから clone して作業している場合の話です。<code>git init</code> でローカルに Git リポジトリを作成した場合は push する必要はありません。</p>
+    <p><code>git push origin debiru-commit-test</code> を実行すると、<strong>「この世界」</strong>の作業内容が GitHub に反映されます。</p>
+  </section>
+
+  <section class="slide">
+    <h2>3-11. GitHub から最新情報を取得する（<code>git pull</code>）</h2>
+    <p>Aさんが <code>git push</code> した後で、Bさんがその内容を確認するためには、Bさんは <code>git pull</code> を実行する必要があります。</p>
+    <p><code>git pull</code> を実行したい場合は、<code>git status</code> でローカルの差分が存在しないことを確認してください。Aさんの世界を見る、ということは自分の世界から離れるということになります。自分の世界で作業途中のものがある場合は、別の世界に移動できません。</p>
+    <p><code>git pull</code> が成功したら、<code>git branch -a</code> で存在するブランチ（Aさんのブランチ名）を確認して、そこに移動してみてください。<code>git checkout A-commit-test</code> を実行するとブランチを移動できます。</p>
+  </section>
+
+  <section class="slide chapter">
+    <h1>4. Git の概念の復習</h1>
+    <p>図で見る Git の概念のおさらい</p>
+  </section>
+
+  <section class="slide">
+    <h2>4-1. Git リポジトリの関係性（clone と push）</h2>
+    <div class="mod-block">
+      <div class="block">
+        <ol>
+          <li>Git 作業者は、GitHub からリポジトリを clone します</li>
+          <li>clone するとローカルリポジトリが生成されます</li>
+          <li>ローカルリポジトリに commit します</li>
+          <li>ローカルからリモートに送信するのが push です</li>
+        </ol>
+      </div>
+      <div class="block">
+        <p><img src={ img('pages/docs/2/git-server-structure.png') } alt="Git のリモートサーバーとローカルサーバーの関係図" /></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>4-2. ローカルリポジトリでの状態遷移</h2>
+    <div class="mod-block">
+      <div class="block">
+        <ul>
+          <li>何も編集していない状態（初期状態）</li>
+          <li>編集するとワーキングエリアに追加される</li>
+          <li>コミット対象として選択されている差分がステージングエリア</li>
+          <li>commit するとステージングエリアの内容がひとつのコミットとして記録される</li>
+        </ul>
+      </div>
+      <div class="block">
+        <p><img src={ img('pages/docs/2/git-commands.png') } alt="ワーキングエリア、ステージングエリアの概念図" /></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>4-3. ブランチとマージ</h2>
+    <div class="mod-block">
+      <div class="block">
+        <ul style="zoom: 0.8;">
+          <li>main ブランチに A のコミットだけした後、topic-X ブランチを作成して作業した</li>
+          <li>その後 main ブランチには B, C, D のコミットが追加された</li>
+          <li>topic-X ブランチでは XB, XC のコミットを追加した</li>
+          <li>このまま push すると、main は <strong>A, B, C, D</strong> で、topic-X は <strong>A, XB, XC</strong> という履歴になっている</li>
+          <li>この状態で、main ブランチに topic-X ブランチの作業内容を合体（マージ）することができる</li>
+        </ul>
+      </div>
+      <div class="block">
+        <p><img src={ img('pages/docs/2/git-branches.png') } alt="main の他に topic-X と topic-Y ブランチがある git log の図" /></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide chapter">
+    <h1>5. さいごに</h1>
+    <p>ここでは説明しきれなかったことについて</p>
+  </section>
+
+  <section class="slide">
+    <h1>5-1. Git と GitHub の活用方法</h1>
+    <p>Git や GitHub は、決してシステム開発をしているエンジニアだけのためのものではありません。</p>
+    <p>非エンジニアである<strong>あなた</strong>にとっても、スマートフォンと同じくらい便利な道具です。</p>
+    <p>Git は基本的に<strong>「テキストファイル」</strong>の差分を管理するためのもので、画像などのような<strong>「バイナリファイル」</strong>を管理することには向いていませんが、使い方によっては画像を管理することも可能です。</p>
+    <p>また、GitHub を使わなくても、<code>git init</code> を使えば、ローカルの手元で気軽に任意のディレクトリを Git リポジトリとして使うことができます。GitHub を応用すれば、デザイナーさんのポートフォリオサイトなども簡単に作ることができるようになります。</p>
+    <p>そのあたりの応用例は、ここでは話しきれないので、Twitter やブログ記事などで紹介したいと思います。興味があれば <Link url="https://x.com/debiru_R" label="@debiru_R" /> までご連絡ください！</p>
   </section>
 </Slide>

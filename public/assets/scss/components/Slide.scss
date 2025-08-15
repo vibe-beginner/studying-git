@@ -1,15 +1,15 @@
 :root {
-  --brand: #0052cc;
-  --accent: #ff6a3d;
+  --brand: var(--color-purple);
+  --accent: var(--color-red);
 
   --global-bg: #fff;
   --global-bg-invert: #000;
   --bg: #f6f0f0;
-  --fg: #0b1220;
+  --fg: #112222;
   --fg-h1: var(--fg);
   --fg-h2: var(--fg);
   --fg-h3: var(--fg);
-  --fg-lead: var(--fg);
+  --fg-lead: var(--color-purple);
   --chapter-bg: linear-gradient(
     135deg,
     color-mix(in srgb, var(--brand) 12%, #fff),
@@ -21,6 +21,7 @@
   --pill-bg: rgb(255 255 255 / 0.4);
   --pill-line: rgb(255 255 255 / 0.2);
   --line: #ccc;
+  --line-light: #ddd;
 
   --fs-5xl: 64px;
   --fs-4xl: 56px;
@@ -56,7 +57,15 @@
   --pagenum-bg: rgb(0 0 0 / 0.45);
   --pill-bg: rgb(255 255 255 / 0.2);
   --pill-line: rgb(255 255 255 / 0.2);
-  --line: #1f2937;
+  --line: #143677;
+  --line-light: #1f2937;
+
+  table thead th {
+    background: var(--global-bg);
+  }
+  pre {
+    background: var(--global-bg);
+  }
 }
 
 html {
@@ -80,8 +89,9 @@ img {
 kbd {
   font-family: var(--font-mono);
 }
-.wbr {
+code {
   display: inline-block;
+  margin-block: 4px;
 }
 .unstyled {
   margin: 0;
@@ -117,7 +127,7 @@ kbd {
 }
 .slides {
   position: absolute;
-  inset: 0;
+  inset: 0 0 50px;
   z-index: 0;
 }
 .slide {
@@ -145,24 +155,22 @@ kbd {
   z-index: 1;
 }
 .slide :is(h1, h2, h3) {
+  margin-bottom: 16px;
   font-weight: bold;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
 }
 .slide h1 {
   color: var(--fg-h1);
   font-size: var(--fs-2xl);
-  line-height: 1.05;
-  margin: 0;
-  letter-spacing: 0.01em;
 }
 .slide h2 {
   color: var(--fg-h2);
   font-size: var(--fs-xl);
-  margin: 0.2em 0 0;
 }
 .slide h3 {
   color: var(--fg-h3);
   font-size: var(--fs-lg);
-  margin: 0;
 }
 .slide :is(ul, ol) {
   margin-left: 36px;
@@ -172,13 +180,48 @@ kbd {
 .slide li {
   font-size: var(--fs-md);
 }
+.slide a {
+  color: inherit;
+}
+.slide a:hover {
+  text-decoration: none;
+}
+.x-red {
+  color: #f00 !important;
+}
+.x-green {
+  color: #090 !important;
+}
+.x-cyan {
+  color: #008B8B !important;
+}
+.x-gold {
+  color: #996515 !important;
+}
+.slide strong {
+  color: var(--accent);
+}
+.slide :is(h1, h2, h3):not(:first-child) {
+  margin-top: 16px;
+}
+.slide .kicker + :is(h1, h2, h3) {
+  margin-top: 0;
+}
+.slide :is(h1, h2, h3):has(+ .lead) {
+  margin-bottom: 0;
+}
+.slide > * :is(p, ul, ol, table, pre, blockquote):not(:first-child) {
+  margin-top: 8px;
+}
+.slide > * :is(li):not(:first-child) {
+  margin-top: 4px;
+}
 .slide .lead {
   font-size: var(--fs-lg);
   color: var(--fg-lead);
 }
 .slide .kicker {
   font: 600 var(--fs-sm) / 1 var(--font-sans);
-  text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--accent);
 }
@@ -188,9 +231,65 @@ kbd {
   align-content: center;
   justify-items: start;
 }
-.slide.chapter h1 {
+.slide.chapter :is(h1, h2, h3) {
   color: var(--brand);
   font-size: var(--fs-4xl);
+}
+.mod-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.mod-block > * {
+  flex: 1 1 0;
+  border: 1px solid var(--line-light);
+}
+.mod-block .block {
+  padding: 8px;
+}
+.mod-block .block.x-fit {
+  flex: 0 0 auto;
+  padding: 0;
+}
+table[data-full-column] :is(th, td) {
+  width: 0;
+  white-space: nowrap;
+}
+table[data-full-column="1"] :is(th, td):nth-child(1) {
+  width: auto;
+  white-space: normal;
+}
+table[data-full-column="2"] :is(th, td):nth-child(2) {
+  width: auto;
+  white-space: normal;
+}
+table[data-full-column="3"] :is(th, td):nth-child(3) {
+  width: auto;
+  white-space: normal;
+}
+table[data-full-column="4"] :is(th, td):nth-child(4) {
+  width: auto;
+  white-space: normal;
+}
+table[data-full-column="5"] :is(th, td):nth-child(5) {
+  width: auto;
+  white-space: normal;
+}
+table[data-full-column="6"] :is(th, td):nth-child(6) {
+  width: auto;
+  white-space: normal;
+}
+table[data-full-column="7"] :is(th, td):nth-child(7) {
+  width: auto;
+  white-space: normal;
+}
+table[data-full-column="8"] :is(th, td):nth-child(8) {
+  width: auto;
+  white-space: normal;
+}
+table[data-full-column="9"] :is(th, td):nth-child(9) {
+  width: auto;
+  white-space: normal;
 }
 
 .misc-controls {
