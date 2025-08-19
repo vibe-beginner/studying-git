@@ -11,9 +11,9 @@
   --fg-h3: var(--fg);
   --fg-lead: var(--color-purple);
   --chapter-bg: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--brand) 12%, #fff),
-    #fff
+    180deg,
+    color-mix(in srgb, var(--brand) 12%, var(--bg)),
+    var(--bg)
   );
   --misc-bg: linear-gradient(to top, rgb(0 0 0 / 0.4), transparent);
   --misc-fg: #111;
